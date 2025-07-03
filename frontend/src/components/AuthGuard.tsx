@@ -14,14 +14,13 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Check for 401 errors and redirect to login
+
     const handleUnauthorized = () => {
       if (!loading && !user) {
         navigate("/login", { replace: true })
       }
     }
 
-    // Listen for storage changes (token removal from other tabs)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === "token" && !e.newValue) {
         navigate("/login", { replace: true })
@@ -45,7 +44,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   }
 
   if (!user) {
-    return null // Will redirect via useEffect
+    return null 
   }
 
   return <>{children}</>
