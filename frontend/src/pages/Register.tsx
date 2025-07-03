@@ -19,7 +19,6 @@ const Register: React.FC = () => {
   const { register, user } = useAuth()
   const navigate = useNavigate()
 
-  // Redirect if already logged in
   useEffect(() => {
     if (user) {
       navigate("/", { replace: true })
@@ -40,15 +39,12 @@ const Register: React.FC = () => {
 
     try {
       await register(formData)
-      // Navigation will happen via useEffect when user state updates
     } catch (err: any) {
       setError(err.message || "Registration failed")
     } finally {
       setLoading(false)
     }
   }
-
-  // Don't render if user is already logged in
   if (user) {
     return null
   }
