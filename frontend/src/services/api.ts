@@ -20,7 +20,6 @@ export const api = axios.create({
   timeout: 10000,
 })
 
-// Add token to requests
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token")
@@ -43,7 +42,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("token")
       localStorage.removeItem("user")
-      // Let the AuthContext handle navigation
     }
 
     return Promise.reject(error)
@@ -134,7 +132,6 @@ export const booksAPI = {
   },
 }
 
-// Test connection function
 export const testConnection = async (): Promise<boolean> => {
   try {
     const response = await api.get("/")
