@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 
 import type React from "react"
 import { useState, useEffect } from "react"
@@ -13,7 +13,6 @@ const Login: React.FC = () => {
   const { login, user } = useAuth()
   const navigate = useNavigate()
 
-  // Redirect if already logged in
   useEffect(() => {
     if (user) {
       navigate("/", { replace: true })
@@ -27,15 +26,12 @@ const Login: React.FC = () => {
 
     try {
       await login({ username, password })
-      // Navigation will happen via useEffect when user state updates
     } catch (err: any) {
       setError(err.message || "Login failed")
     } finally {
       setLoading(false)
     }
   }
-
-  // Don't render if user is already logged in
   if (user) {
     return null
   }
